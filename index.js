@@ -39,7 +39,7 @@ var calcString = "";
 
 function clearScreen() {
   //clear the input array
-
+  inputArray = [];
   //clear the screens
   const outputDiv = document.getElementById("outputScreen");
   outputDiv.textContent = "0";
@@ -77,22 +77,43 @@ function numberButton(number){
 }
 
 function operatorButton(operator){
-  //check that the last element in the inputArray is a number and not a dot or another operator
+
+  const outputDiv = document.getElementById("outputScreen");
+  const calculationDiv = document.getElementById("calculationScreen");
+  var duplicateOperator
+  
+
+  //replace the last inputArray item if it's already an operator
+  console.log(inputArray.slice(-1), inputArray.length);
+  if ((inputArray.slice(-1) == '+' || inputArray.slice(-1) == '-' || inputArray.slice(-1) == 'x' || inputArray.slice(-1) == '/') && (inputString == "")) {
+    inputArray.pop();
+  }
+    if (inputString != "") inputArray.push(inputString);
+    inputArray.push(operator);
+
+
+    calculationDiv.textContent = inputArray.join("");
+
+
+
+
+  console.log(inputArray);
+
+  
   
   //clear the input screen
-  const outputDiv = document.getElementById("outputScreen");
+
   outputDiv.textContent = "";
 
   //clear the input string
   inputString = "";
   
-  //add the operator string to the 
-  // const calcString = operator;
-  const calculationDiv = document.getElementById("calculationScreen");
-  calculationDiv.textContent += operator;
+ 
 }
 
 function dotButton(){
+  //check dot button isn't already in the array or there's an operator there and concatenate to a number
+
 
 }
 
