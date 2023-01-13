@@ -16,13 +16,13 @@ function divide(a, b){
 
 function operate(a, operator, b){
   switch (operator) {
-    case "plus":
+    case "+":
       return add(a, b)
-    case "minus":
+    case "-":
       return subtract(a, b)
-    case "times":
+    case "x":
       return multiply(a, b)
-    case "divide by":
+    case "/":
       return divide(a, b)
   };
 };
@@ -36,6 +36,7 @@ function operate(a, operator, b){
 var inputArray = [];
 var inputString = "";
 var calcString = "";
+var equals = false;
 
 function clearScreen() {
   //clear the input array
@@ -50,16 +51,33 @@ function clearScreen() {
 }
 
 function backSpace() {
-  //remove the last number
+  //if the input string isn't empty then remove the last character and update the output screen
+
+
+
 }
 
   
 
 function numberButton(number){
+  //if the equals flag is true then clear the inputString and set flag to false
+  // if (equals = true){
+  //   equals = false;
+  //   inputString = "";
+  // }
+
+
   // clear 0 if it is the first element in the input string 
-  // console.log(inputString.charAt(0));
   
   if (inputString === "0") inputString = "";
+
+  //check if there's a dot there and ignore
+
+  if (inputString.includes('.') && number == '.') number = "";
+
+  //if there's just a dot then prefix with a 0
+
+  if (inputString == "" && number == '.') number = "0.";
 
 
   //append the input number to the input string
@@ -80,44 +98,66 @@ function operatorButton(operator){
 
   const outputDiv = document.getElementById("outputScreen");
   const calculationDiv = document.getElementById("calculationScreen");
-  var duplicateOperator
-  
 
-  //replace the last inputArray item if it's already an operator
-  console.log(inputArray.slice(-1), inputArray.length);
+
+  //replace the last inputArray item if it's already an operator with the new one
+
   if ((inputArray.slice(-1) == '+' || inputArray.slice(-1) == '-' || inputArray.slice(-1) == 'x' || inputArray.slice(-1) == '/') && (inputString == "")) {
     inputArray.pop();
   }
-    if (inputString != "") inputArray.push(inputString);
-    inputArray.push(operator);
 
+  //add the contents of the input string to the input array before adding the operator
+  if (inputString != "") inputArray.push(inputString);
 
-    calculationDiv.textContent = inputArray.join("");
+  //Update the calculation screen
+  inputArray.push(operator);
+  calculationDiv.textContent = inputArray.join("");
 
-
-
-
-  console.log(inputArray);
-
-  
-  
   //clear the input screen
-
   outputDiv.textContent = "";
 
   //clear the input string
   inputString = "";
-  
- 
-}
 
-function dotButton(){
-  //check dot button isn't already in the array or there's an operator there and concatenate to a number
-
+  console.log(inputArray);
 
 }
 
 function equalsButton(){
+
+//If there is just the number in the array then return just the number
+//If there is the number and an operator in the array then operate(number, operator, number)
+//If there are 3 or more then take the number at element 0, operator at element 1, number at element 2, pass to the operate function
+//replace the first three elements of the array with the returned result
+
+var answer;
+
+//add the contents of the input string to the input array before sending to operate()
+if (inputString != "") inputArray.push(inputString);
+console.log(inputArray[0]);
+console.log(inputArray[1]);
+console.log(inputArray[2]);
+
+
+answer = operate(parseFloat(inputArray[0]), inputArray[1], parseFloat(inputArray[2]));
+
+var displayAnswer = Math.round (answer * 1e2) / 1e2;
+
+const outputDiv = document.getElementById("outputScreen");
+outputDiv.textContent = displayAnswer;
+
+//set the flag to say that the equals button has been pressed
+
+equals = true;
+
+//replace the inputString with the answer
+
+inputString = displayAnswer.toString();
+
+console.log(answer);
+
+
+
 
 }
 
