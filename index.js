@@ -124,7 +124,9 @@ function operatorButton(operator){
   //clear the input string
   inputString = "";
 
-  checkDivideByZero();
+  if (answer == "divZero"){
+    divideByZeroDisplay();
+  }
 
 }
 
@@ -157,13 +159,10 @@ function calculateRunningTotal() {
 
 }
 
-function checkDivideByZero(){
+function divideByZeroDisplay(){
   const outputDiv = document.getElementById("outputScreen");
-  if (answer == "divZero"){
   clearScreen();
   outputDiv.textContent = 'No dividing by 0!';
-
-}
 }
 
 function equalsButton(){
@@ -177,7 +176,10 @@ function equalsButton(){
 
   calculateRunningTotal();
 
-  checkDivideByZero();
+  if (answer == "divZero"){
+    divideByZeroDisplay();
+    return;
+  }
 
   calculationDiv.textContent += inputString;
 
