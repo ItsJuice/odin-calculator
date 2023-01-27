@@ -87,7 +87,6 @@ function operatorButton(operator){
   const calculationDiv = document.getElementById("calculationScreen");
   const outputDiv = document.getElementById("outputScreen");
 
-
   // if equals is the last button pressed then the answer becomes the number to be operated on
   if (inputArray.slice(-1) == "=") {
     inputString = inputArray[0];
@@ -110,7 +109,7 @@ function operatorButton(operator){
   //update the calculation screen with the inputString
   calculationDiv.textContent = inputArray.join("");
 
-  // calculate the running total (& update the outputScreen)
+  // calculate the running total
   calculateRunningTotal();
 
   //send displayAnswer to the outputScreen
@@ -125,10 +124,13 @@ function operatorButton(operator){
   //clear the input string
   inputString = "";
 
+  checkDivideByZero();
+
 }
 
 function calculateRunningTotal() {
 
+  const outputDiv = document.getElementById("outputScreen");
 
   if ((inputArray.length === 0 ) && (inputString == "")) { //if there is nothing in inputArray and inputString then answer = 0
     answer = 0;
@@ -155,6 +157,15 @@ function calculateRunningTotal() {
 
 }
 
+function checkDivideByZero(){
+  const outputDiv = document.getElementById("outputScreen");
+  if (answer == "divZero"){
+  clearScreen();
+  outputDiv.textContent = 'No dividing by 0!';
+
+}
+}
+
 function equalsButton(){
   const outputDiv = document.getElementById("outputScreen");
   const calculationDiv = document.getElementById("calculationScreen");
@@ -166,11 +177,7 @@ function equalsButton(){
 
   calculateRunningTotal();
 
-  if (answer == "divZero"){
-    clearScreen();
-    outputDiv.textContent = 'No dividing by 0!';
-    return;
-  }
+  checkDivideByZero();
 
   calculationDiv.textContent += inputString;
 
