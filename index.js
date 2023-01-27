@@ -47,7 +47,7 @@ function clearScreen() {
 
 }
 
-function backspace() {
+function backspaceButton() {
   //if the input string isn't empty and the last action wasn't 'equals' then remove the last character and update the output screen
   if (inputString != "" && inputArray.slice(-1) != "=") {
     inputString = inputString.slice(0,-1);
@@ -85,6 +85,8 @@ function numberButton(number){
 function operatorButton(operator){
 
   const calculationDiv = document.getElementById("calculationScreen");
+  const outputDiv = document.getElementById("outputScreen");
+
 
   // if equals is the last button pressed then the answer becomes the number to be operated on
   if (inputArray.slice(-1) == "=") {
@@ -109,7 +111,10 @@ function operatorButton(operator){
   calculationDiv.textContent = inputArray.join("");
 
   // calculate the running total (& update the outputScreen)
-  runningTotal();
+  calculateRunningTotal();
+
+  //send displayAnswer to the outputScreen
+  outputDiv.textContent = displayAnswer;
 
   //Update the input Array with the operator
   inputArray.push(operator);
@@ -122,9 +127,8 @@ function operatorButton(operator){
 
 }
 
-function runningTotal() {
+function calculateRunningTotal() {
 
-  const outputDiv = document.getElementById("outputScreen");
 
   if ((inputArray.length === 0 ) && (inputString == "")) { //if there is nothing in inputArray and inputString then answer = 0
     answer = 0;
@@ -148,8 +152,7 @@ function runningTotal() {
 
   displayAnswer = Math.round (answer * 1e5) / 1e5;
 
-  //send displayAnswer to the outputScreen
-  outputDiv.textContent = displayAnswer;
+
 }
 
 function equalsButton(){
@@ -161,7 +164,7 @@ function equalsButton(){
     return;
   }
 
-  runningTotal();
+  calculateRunningTotal();
 
   if (answer == "divZero"){
     clearScreen();
