@@ -1,14 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Document</title>
 </head>
+
 <body>
     <h1>Calculator</h1>
-    
+
     <script src="index.js"></script>
+
+    <div id="case" class="calculator_case">
+
+        <div id="calculationScreen" class="calculation_screen"></div>
+        <div id="outputScreen" class="output_screen">0</div>
+
+        <div class="button_row">
+            <button type="button" id="seven" onclick="numberButton(7)" class="number_button">7</button>
+            <button type="button" id="eight" onclick="numberButton(8)" class="number_button">8</button>
+            <button type="button" id="nine" onclick="numberButton(9)" class="number_button">9</button>
+            <button type="button" id="plus" onclick="operatorButton('+')" class="operator_button">+</button>
+            
+        </div>
+        <div class="button_row">
+            <button type="button" id="four" onclick="numberButton(4)" class="number_button">4</button>
+            <button type="button" id="five" onclick="numberButton(5)" class="number_button">5</button>
+            <button type="button" id="six" onclick="numberButton(6)" class="number_button">6</button>
+            <button type="button" id="minus" onclick="operatorButton('-')" class="operator_button">-</button>
+            
+        </div>
+        <div class="button_row">
+            <button type="button" id="one" onclick="numberButton(1)" class="number_button">1</button>
+            <button type="button" id="two" onclick="numberButton(2)" class="number_button">2</button>
+            <button type="button" id="three" onclick="numberButton(3)" class="number_button">3</button>
+            <button type="button" id="times" onclick="operatorButton('x')" class="operator_button">x</button>
+            
+        </div>
+        <div class="button_row">
+            <button type="button" id="backspace" onclick="backspace()" class="number_button">Bck</button>
+            <button type="button" id="zero" onclick="numberButton(0)" class="number_button">0</button>
+            <button type="button" id="dot" onclick="numberButton('.')" class="number_button">.</button>
+            <button type="button" id="divide" onclick="operatorButton('/')" class="operator_button">/</button>
+            
+        </div>
+        <div class="button_row">
+            <button type="button" id="clear" onclick="clearScreen()" class="number_button">Clear</button>
+            <button type="button" id="equals" onclick="equalsButton()" class="number_button">=</button>
+
+        </div>
+
+    </div>
 </body>
+
 </html>
